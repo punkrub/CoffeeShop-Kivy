@@ -102,7 +102,7 @@ class MenuScreen(Screen):
             card.add_widget(lbl)
             
             # ปุ่มกดสั่ง (สีเขียว)
-            btn_add = Button(text="ADD +", background_color=(0, 0.6, 0, 1))
+            btn_add = Button(text="ADD", background_color=(0, 0.6, 0, 1))
             # ผูกฟังก์ชัน (ใช้ lambda เพื่อส่งราคาและชื่อเข้าไป)
             btn_add.bind(on_press=lambda x, p=item['price'], n=item['name']: self.add_item(p, n))
             card.add_widget(btn_add)
