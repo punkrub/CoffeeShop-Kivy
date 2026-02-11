@@ -105,6 +105,13 @@ class LoginScreen(Screen):
 class MenuScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        with self.canvas.before:
+            Color(0.92, 0.84, 0.72, 1)
+            self.bg_rect = Rectangle(pos=self.pos, size=self.size)
+        
+        self.bind(pos=self._update_bg, size=self._update_bg)
+
         self.total = 0
         self.cart_items = []
         
@@ -185,6 +192,10 @@ class MenuScreen(Screen):
         self.clear_order(None) 
         # เปลี่ยนหน้า
         self.manager.current = 'receipt'
+
+    def _update_bg(self, *args):
+        self.bg_rect.pos = self.pos
+        self.bg_rect.size = self.size
 
 class ReceiptScreen(Screen):
     def __init__(self, **kwargs):
