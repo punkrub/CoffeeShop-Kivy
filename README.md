@@ -19,3 +19,9 @@ Responsibilities
 - ตกแต่งความสวยงาม เลือกโทนสี
 - สร้างและจัดเตรียม Mock Data สำหรับเมนูเครื่องดื่ม
 - จัดการ Version Control และตรวจสอบความเรียบร้อยก่อนส่ง
+
+
+การติดตั้งและรันโปรแกรม (Installation & Run)
+1. Clone Project
+   ```bash
+   git clone [https://github.com/punkrub/CoffeeShop-Kivy.git](https://github.com/punkrub/CoffeeShop-Kivy.git)
