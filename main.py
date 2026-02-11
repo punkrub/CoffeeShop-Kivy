@@ -48,7 +48,8 @@ class LoginScreen(Screen):
         btn = Button(
             text="ENTER",
             size_hint_y=None,
-            height=50
+            height=50,
+                background_color=(1, 0.7, 0, 1)  # สีส้ม
         )
 
         btn.bind(on_press=self.go_menu)  # ← callback
