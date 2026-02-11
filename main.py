@@ -32,6 +32,10 @@ DRINK_MENU = [
 class LoginScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        with self.canvas.before:
+            self.bg_image = Rectangle(source='bg.png', pos=self.pos, size=self.size)
+        
+        self.bind(size=self._update_bg, pos=self._update_bg)
 
         layout = BoxLayout(orientation='vertical', padding=40, spacing=20)
 
@@ -60,6 +64,10 @@ class LoginScreen(Screen):
 
     def go_menu(self, instance):
         self.manager.current = 'menu'
+
+    def _update_bg(self, *args):
+        self.bg_image.pos = self.pos
+        self.bg_image.size = self.size
 
 
 
