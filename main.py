@@ -8,6 +8,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
 from kivy.graphics import Rectangle
+from kivy.graphics import Color, RoundedRectangle
 
 Window.size = (360, 640)
 
@@ -32,6 +33,32 @@ DRINK_MENU = [
 class LoginScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        layout = BoxLayout(orientation='vertical', padding=40, spacing=20)
+
+        welcome_label = Label(
+            text="WELCOME CAFE", 
+            font_size=45, 
+            bold=True,
+            color=(1, 1, 1, 1),
+            size_hint=(None, None),
+            size=(300, 80),
+            pos_hint={'center_x': 0.5},
+            font_name='Lalezar-Regular.ttf'
+        )
+
+        with welcome_label.canvas.before:
+            Color(0.6, 0.4, 0.2, 1)
+            self.rect = RoundedRectangle(
+                pos=welcome_label.pos, 
+                size=welcome_label.size, 
+                radius=[20,]
+            )
+        
+        welcome_label.bind(pos=self.update_rect, size=self.update_rect)
+        
+        layout.add_widget(welcome_label)
+
         with self.canvas.before:
             self.bg_image = Rectangle(source='bg.png', pos=self.pos, size=self.size)
         
@@ -54,7 +81,7 @@ class LoginScreen(Screen):
             text="ENTER",
             size_hint_y=None,
             height=50,
-                background_color=(1, 0.5, 0, 1)
+                background_color=(1, 0.7, 0, 1)
         )
 
         btn.bind(on_press=self.go_menu)
@@ -68,6 +95,10 @@ class LoginScreen(Screen):
     def _update_bg(self, *args):
         self.bg_image.pos = self.pos
         self.bg_image.size = self.size
+
+    def update_rect(self, instance, value):
+        self.rect.pos = instance.pos
+        self.rect.size = instance.size
 
 
 
@@ -102,7 +133,7 @@ class MenuScreen(Screen):
             card.add_widget(lbl)
             
             # ปุ่มกดสั่ง (สีเขียว)
-            btn_add = Button(text="ADD", background_color=(0, 0.6, 0, 1))
+            btn_add = Button(text="ADD +", background_color=(0, 0.6, 0, 1))
             # ผูกฟังก์ชัน (ใช้ lambda เพื่อส่งราคาและชื่อเข้าไป)
             btn_add.bind(on_press=lambda x, p=item['price'], n=item['name']: self.add_item(p, n))
             card.add_widget(btn_add)
@@ -113,9 +144,9 @@ class MenuScreen(Screen):
         self.layout.add_widget(scroll)
 
         # 4. Footer (ส่วนแสดงยอดเงินและปุ่ม Pay)
-        footer = BoxLayout(orientation='vertical', size_hint_y=0.3, padding=12)
+        footer = BoxLayout(orientation='vertical', size_hint_y=0.3, padding=10)
         
-        self.lbl_total = Label(text="Total: 0 THB", font_size=26, color=(1, 1, 0, 1))
+        self.lbl_total = Label(text="Total: 0 THB", font_size=24, color=(1, 1, 0, 1))
         footer.add_widget(self.lbl_total)
         
         btns = BoxLayout(spacing=10)
@@ -125,7 +156,7 @@ class MenuScreen(Screen):
         btns.add_widget(btn_clear)
         
         # ปุ่ม Pay
-        btn_pay = Button(text="PAY", background_color=(0, 0.3, 0.7, 1))
+        btn_pay = Button(text="PAY", background_color=(0, 0.4, 0.8, 1))
         btn_pay.bind(on_press=self.go_pay)
         btns.add_widget(btn_pay)
         
