@@ -201,6 +201,12 @@ class ReceiptScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        with self.canvas.before:
+            Color(0.96, 0.94, 0.85, 1)
+            self.bg_rect = Rectangle(pos=self.pos, size=self.size)
+        
+        self.bind(pos=self._update_bg, size=self._update_bg)
+
         layout = BoxLayout(orientation='vertical', padding=40, spacing=20)
 
         layout.add_widget(Label(text="THANK YOU!", font_size=35))
@@ -224,6 +230,10 @@ class ReceiptScreen(Screen):
 
     def go_back(self, instance):
         self.manager.current = 'menu'
+
+    def _update_bg(self, *args):
+        self.bg_rect.pos = self.pos
+        self.bg_rect.size = self.size
  
 # --- Main App ---
 class CoffeeShopApp(App):
