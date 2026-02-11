@@ -16,7 +16,10 @@ DRINK_MENU = []
 
 # --- พื้นที่งาน นาย B (Login Screen) ---
 class LoginScreen(Screen):
-    pass 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # ใส่ข้อความจะได้รู้ว่าหน้านี้คือ Login
+        self.add_widget(Label(text="Login Screen\n(Waiting for Mr. B)", font_size=30)) 
 
 # --- พื้นที่งาน นาย A (Menu Screen & Logic) ---
 class MenuScreen(Screen):
