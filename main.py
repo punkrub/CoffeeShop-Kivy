@@ -54,7 +54,7 @@ class LoginScreen(Screen):
             text="ENTER",
             size_hint_y=None,
             height=50,
-                background_color=(1, 0.7, 0, 1)
+                background_color=(1, 0.5, 0, 1)
         )
 
         btn.bind(on_press=self.go_menu)
