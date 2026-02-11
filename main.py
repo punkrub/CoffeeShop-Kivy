@@ -125,7 +125,7 @@ class MenuScreen(Screen):
         btns.add_widget(btn_clear)
         
         # ปุ่ม Pay
-        btn_pay = Button(text="PAY", background_color=(0, 0.4, 0.8, 1))
+        btn_pay = Button(text="PAY", background_color=(0, 0.3, 0.7, 1))
         btn_pay.bind(on_press=self.go_pay)
         btns.add_widget(btn_pay)
         
