@@ -31,3 +31,15 @@ pip install kivy
 3. รันโปรแกรม:
 python main.py
 
+
+ฟีเจอร์หลัก (Key Features)
+ตามข้อกำหนดของโจทย์ (Requirements):
+
+GUI Elements: ใช้งาน Widgets มากกว่า 30 ชิ้น (ประกอบด้วย Labels, Buttons, TextInputs, Layouts, ScrollView)
+
+Interactivity: มี Callbacks Function มากกว่า 10 จุด สำหรับโต้ตอบกับผู้ใช้
+
+Data Management: มีการส่งผ่านข้อมูลระหว่างหน้าจอ (Screen Manager)
+
+Calculation: ระบบคำนวณราคาสินค้าและรวมยอดเงินแบบ Real-time
+
