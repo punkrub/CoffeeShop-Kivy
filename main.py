@@ -7,11 +7,10 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
+from kivy.graphics import Rectangle
 
-# ตั้งขนาดจอเหมือนมือถือ
 Window.size = (360, 640)
 
-# --- พื้นที่งาน นาย B (Menu Data) ---
 DRINK_MENU = [
     {"name": "Espresso", "price": 40},
     {"name": "Americano", "price": 45},
@@ -29,10 +28,17 @@ DRINK_MENU = [
     {"name": "Strawberry Soda", "price": 40},
     {"name": "Blueberry Smoothie", "price": 70},
 ]
-# --- พื้นที่งาน นาย B (Login Screen) ---
+
 class LoginScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        with self.canvas.before:
+            self.bg_image = Rectangle(source='bg.png', pos=self.pos, size=self.size)
+        
+        self.bind(size=self._update_bg, pos=self._update_bg)
+
+        layout = BoxLayout(orientation='vertical', padding=40, spacing=20)
 
         layout = BoxLayout(orientation='vertical', padding=40, spacing=20)
 
@@ -48,10 +54,11 @@ class LoginScreen(Screen):
         btn = Button(
             text="ENTER",
             size_hint_y=None,
-            height=50
+            height=50,
+                background_color=(1, 0.7, 0, 1)
         )
 
-        btn.bind(on_press=self.go_menu)  # ← callback
+        btn.bind(on_press=self.go_menu)
         layout.add_widget(btn)
 
         self.add_widget(layout)
@@ -59,9 +66,11 @@ class LoginScreen(Screen):
     def go_menu(self, instance):
         self.manager.current = 'menu'
 
-# --- พื้นที่งาน นาย A (Menu Screen & Logic) ---
-# --- พื้นที่งาน นาย A (Menu Screen & Logic) ---
-# แก้ไขโดย นาย A: เพิ่ม Loop สร้างปุ่มและระบบคิดเงิน
+    def _update_bg(self, *args):
+        self.bg_image.pos = self.pos
+        self.bg_image.size = self.size
+
+
 class MenuScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -79,8 +88,7 @@ class MenuScreen(Screen):
         header.add_widget(btn_logout)
         self.layout.add_widget(header)
         
-        # 3. ScrollView & Grid (ส่วนเมนูที่เลื่อนได้)
-        # นี่คือหัวใจสำคัญ! วนลูปสร้างปุ่มจากข้อมูลของนาย B
+        # 3. ScrollView & Grid
         scroll = ScrollView(size_hint_y=0.6)
         grid = GridLayout(cols=2, spacing=10, padding=10, size_hint_y=None)
         grid.bind(minimum_height=grid.setter('height'))
@@ -116,7 +124,7 @@ class MenuScreen(Screen):
         btn_clear.bind(on_press=self.clear_order)
         btns.add_widget(btn_clear)
         
-        # ปุ่ม Pay (สีน้ำเงิน)
+        # ปุ่ม Pay
         btn_pay = Button(text="PAY", background_color=(0, 0.4, 0.8, 1))
         btn_pay.bind(on_press=self.go_pay)
         btns.add_widget(btn_pay)
@@ -147,7 +155,6 @@ class MenuScreen(Screen):
         # เปลี่ยนหน้า
         self.manager.current = 'receipt'
 
-# --- พื้นที่งาน นาย C (Receipt Screen) ---
 class ReceiptScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
