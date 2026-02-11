@@ -115,7 +115,7 @@ class MenuScreen(Screen):
         # 4. Footer (ส่วนแสดงยอดเงินและปุ่ม Pay)
         footer = BoxLayout(orientation='vertical', size_hint_y=0.3, padding=10)
         
-        self.lbl_total = Label(text="Total: 0 THB", font_size=24, color=(1, 1, 0, 1))
+        self.lbl_total = Label(text="Total: 0 THB", font_size=26, color=(1, 1, 0, 1))
         footer.add_widget(self.lbl_total)
         
         btns = BoxLayout(spacing=10)
