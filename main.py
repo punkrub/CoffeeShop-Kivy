@@ -202,7 +202,7 @@ class ReceiptScreen(Screen):
         super().__init__(**kwargs)
 
         with self.canvas.before:
-            Color(0.96, 0.94, 0.85, 1)
+            Color(0.4, 0.2, 0.1, 1)
             self.bg_rect = Rectangle(pos=self.pos, size=self.size)
         
         self.bind(pos=self._update_bg, size=self._update_bg)
